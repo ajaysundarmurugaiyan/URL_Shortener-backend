@@ -6,7 +6,14 @@ const cors = require('cors');
 const { nanoid } = require('nanoid');
 
 const app = express();
-app.use(cors());
+const allowedOrigins = [
+  'https://url-shortner-pink-nine.vercel.app', // your Vercel frontend URL
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // set to true if you need cookies/auth, otherwise can remove
+}));
 app.use(express.json());
 
 // MongoDB connection
