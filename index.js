@@ -11,9 +11,20 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true, // set to true if you need cookies/auth, otherwise can remove
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'https://url-shortner-pink-nine.vercel.app',
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
 }));
+
 app.use(express.json());
 
 // MongoDB connection
