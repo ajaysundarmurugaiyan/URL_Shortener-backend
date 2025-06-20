@@ -14,6 +14,7 @@ app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [
       'https://url-shortner-pink-nine.vercel.app',
+      'https://localhost:5173'
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
